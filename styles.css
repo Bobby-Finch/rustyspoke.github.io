@@ -24,6 +24,10 @@ light: #f7fafa
   margin: 0;
 }
 
+.main {
+  background-color: white;
+}
+
 /*
   Typographic tweaks!
   3. Add accessible line-height
@@ -33,6 +37,9 @@ body {
   font-family: "Sanchez", serif;
   position: relative;
   -webkit-font-smoothing: antialiased;
+  font-family: 'Sanchez', serif;
+  line-height: 1.5rem;
+  font-size: 0.938rem;
 }
 
 /*
@@ -133,15 +140,18 @@ a {
 /** Header Navigation **/
 
 .navbar {
-  position: relative;
+  position: sticky;
   z-index: 999;
   background: transparent;
   max-width: 80rem;
+  width: 100%;
   padding: 2rem;
   transition: all 0.5s ease-out;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  top: 0;
+  margin: 0 auto;
 }
 
 .nav {
@@ -194,6 +204,7 @@ a {
   width: 3rem;
   height: 3rem;
 }
+
 
 header .navbar-brand h1 {
   color: #f7fafa;
@@ -360,6 +371,100 @@ a.submit:hover {
   background-color: #f8f8f8;
 }
 
+.content.container {
+  color: #222222;
+  max-width: 71.25rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.our-mission {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.875rem;
+  padding-bottom: 20px;
+  margin: 20px 0 10px;
+}
+
+.row {
+  display: flex;
+  margin: 20px 0;
+}
+
+.grassroots-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.333%;
+}
+
+.modal-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-dialog.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal-content {
+  background-color: white;
+  width: 37.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
+  max-width: 100%;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.modal-header {
+  padding: 15px;
+  display: flex;
+  flex-direction: row-reverse;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 15px;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+}
+
+.do-it-yourself-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.333%;
+}
+
+.community-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33.333%;
+}
+
 #about .btn-lg {
   border: none;
   border-bottom: 1px solid #cbcbcb;
@@ -403,10 +508,72 @@ a.submit:hover {
   margin-top: 20px;
 }
 
+label[for="mce-EMAIL"] {
+  font-weight: bold;
+}
+
+label[for="mce-FNAME"] {
+  font-weight: bold;
+}
+
+label[for="mce-LNAME"] {
+  font-weight: bold;
+}
+
+.email-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mce-EMAIL {
+  background-color: white;
+}
+
+#mce-FNAME {
+  background-color: white;
+}
+
+#mce-LNAME {
+  background-color: white;
+}
+
 /** Page -- The Shop **/
+
+.shop-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 15px;
+}
 
 #theShop {
   padding-top: 20px;
+}
+
+.shop-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.875rem;
+  padding-bottom: 20px;
+  margin: 20px 0 10px;
+}
+
+.shop-paragraph {
+  margin-bottom: 10px;
+}
+
+.shop-icon {
+  margin: 20px 0;
+}
+
+.shop-h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
 }
 
 .service {
