@@ -264,46 +264,88 @@ header .inbody .navbar-brand span.subhead {
 
 /**  Carousel Fade **/
 
-.carousel.fade {
-  opacity: 1;
-}
-
-.carousel.fade .item {
-  transition: opacity ease-out 0.7s;
-  left: 0;
-  opacity: 0;
-  top: 0;
-  position: absolute;
-  /* width: 100%;
-  display: block; */
-}
-
-.carousel.fade .item:first-child {
-  top: auto;
-  opacity: 0;
+.carousel {
   position: relative;
+  height: 600px;
+  width: 80%;
+  margin: 0 auto;
 }
 
-.carousel.fade .item.active {
-  opacity: 1;
+.carousel__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.carousel-control {
-  opacity: 0;
+.carousel__track-container {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
-.carousel-control.right,
-.carousel-control.left {
-  background-image: none;
+
+.carousel__track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+  height: 100%;
+  transition: transform 250ms ease-in;
 }
 
-#featured .item {
-  background-size: cover;
-  background-repeat: no-repeat;
-  /* background-position: center center; */
-  width: 100vw;
-  height: 100vh;
+
+.carousel__slide {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
 }
+
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  cursor: pointer;
+}
+
+.carousel__button--left {
+  left: -15px;
+}
+
+.carousel__button--right {
+  right: -15px;
+}
+
+/* need to find left and right svg buttons
+.carousel__button img {
+  width: 12px;
+} */
+
+.carousel__nav {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.carousel__indicator {
+  border: 0;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.carousel__indicator.current-slide {
+  background-color: rgba(0, 0, 0, .75);
+}
+
+.is-hidden {
+  display: none;
+}
+
 
 /** Page -- About **/
 
@@ -347,6 +389,7 @@ header .inbody .navbar-brand span.subhead {
 .img-circle {
   max-width: 200px;
 }
+
 a.submit {
   color: #9d9d9d;
   display: inline-block;
@@ -402,18 +445,35 @@ a.submit:hover {
 }
 
 .modal-dialog {
+  width: 450px;
+  position: fixed;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 0.3s ease-in-out;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  z-index: 20;
+  background-color: #fff;
+}
+
+.modal-dialog.active {
+  top: 15%;
+}
+
+#overlay {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+#overlay.active {
+  display: block;
 }
 
 .modal-dialog.show {
@@ -447,6 +507,16 @@ a.submit:hover {
 .modal-title {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #777777;
+  display: flex;
+  margin-left: auto;
 }
 
 .do-it-yourself-modal {
@@ -464,6 +534,7 @@ a.submit:hover {
   align-items: center;
   width: 33.333%;
 }
+
 
 #about .btn-lg {
   border: none;
@@ -595,15 +666,24 @@ label[for="mce-LNAME"] {
   padding-bottom: 30px;
 }
 
-.member {
-  margin: 10px 0;
+#members {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.875rem;
+  padding-bottom: 20px;
+  margin: 20px 0 10px;
 }
 
-.member h3 {
-  font-weight: 300;
-  font-size: 1.2 em;
+.member-description {
   color: #222222;
-  padding-bottom: 5px;
+}
+
+.member-name {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .member p {
@@ -628,7 +708,18 @@ label[for="mce-LNAME"] {
 
 #donate h2 {
   color: #f7fafa;
-  padding-top: 10px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.875rem;
+  padding-bottom: 30px;
+}
+
+.donations-description {
+  color: #f7fafa;
+  padding-bottom: 10px;
 }
 
 #donate button,
@@ -680,11 +771,29 @@ div .donateimg {
 /** Footer Navigation **/
 
 footer {
+  display: flex;
+  justify-content: center;
   background: #222222;
   color: #777777;
-  font-size: 0.8em;
+  font-size: 0.8rem;
   text-align: center;
   padding: 50px 0 50px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 71.25rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.footer-icon {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 65px;
 }
 
 footer .email {

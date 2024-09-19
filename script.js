@@ -1,104 +1,114 @@
-$(function () {
-  "use strict";
+// Carousel
 
-  var topoffset = 62; //variable for menu height
-  var slideqty = $("#featured .item").length;
-  var wheight = $(window).height(); //get the height of the window
-  var randSlide = Math.floor(Math.random() * slideqty);
+const track = document.querySelector(".carousel__track");
+const slides = Array.from(track.children);
+const nextButton = document.querySelector(".carousel__button--right");
+const prevButton = document.querySelector(".carousel__button--left");
+const dotsNav = document.querySelector(".carousel__nav");
+const dots = Array.from(dotsNav.children);
+const slideWidth = slides[0].getBoundingClientRect().width;
 
-  $("#featured .item").eq(randSlide).addClass("active");
+//arrange slides next to one another
 
-  $(".fullheight").css("height", wheight); //set to window tallness
+const setSlidePosition = (slide, index) => {
+  slide.style.left = slideWidth * index + "px";
+};
 
-  //replace IMG inside carousels with a background image
-  $("#featured .item img").each(function () {
-    var imgSrc = $(this).attr("src");
-    $(this)
-      .parent()
-      .css({ "background-image": "url(" + imgSrc + ")" });
-    $(this).remove();
-  });
+slides.forEach(setSlidePosition);
 
-  //adjust height of .fullheight elements on window resize
-  $(window).resize(function () {
-    wheight = $(window).height(); //get the height of the window
-    $(".fullheight").css("height", wheight); //set to window tallness
-  });
+const moveToSlide = (track, currentSlide, targetSlide) => {
+  track.style.transform = "translateX(-" + targetSlide.style.left + ")";
+  currentSlide.classList.remove("current-slide");
+  targetSlide.classList.add("current-slide");
+};
 
-  //activate scrollspy
-  $("body").scrollspy({
-    target: "header .navbar",
-    offset: topoffset,
-  });
+const updateDots = (currentDot, targetDot) => {
+  currentDot.classList.remove("current-slide");
+  targetDot.classList.add("current-slide");
+};
 
-  // affix the navbar after scroll below header
-  $("#nav").affix({
-    offset: {
-      top: $("header").height() - $("#nav").height(),
-    },
-  });
-
-  //add inbody class
-  var hash = $(this).find("li.active a").attr("href");
-  if (hash !== "#featured") {
-    $("header nav").addClass("inbody");
+const hideShowArrows = (slides, prevButton, nextButton, targetIndex) => {
+  if (targetIndex === 0) {
+    prevButton.classList.add("is-hidden");
+    nextButton.classList.remove("is-hidden");
+  } else if (targetIndex === slides.length - 1) {
+    prevButton.classList.remove("is-hidden");
+    nextButton.classList.add("is-hidden");
   } else {
-    $("header nav").removeClass("inbody");
+    prevButton.classList.remove("is-hidden");
+    nextButton.classList.remove("is-hidden");
   }
+};
 
-  //add an inbody class to nav when scrollspy event fires
-  $(".navbar-fixed-top").on("activate.bs.scrollspy", function () {
-    var hash = $(this).find("li.active a").attr("href");
-    if (hash !== "#featured") {
-      $("header nav").addClass("inbody");
-    } else {
-      $("header nav").removeClass("inbody");
-    }
+// move slides left when i click left
+prevButton.addEventListener("click", (e) => {
+  const currentSlide = track.querySelector(".current-slide");
+  const prevSlide = currentSlide.previousElementSibling;
+  const currentDot = dotsNav.querySelector(".current-slide");
+  const prevDot = currentDot.previousElementSibling;
+  const prevIndex = slides.findIndex((slide) => slide === prevSlide);
+
+  moveToSlide(track, currentSlide, prevSlide);
+  updateDots(currentDot, prevDot);
+  hideShowArrows(slides, prevButton, nextButton, prevIndex);
+});
+
+// move slides right when i click right
+nextButton.addEventListener("click", () => {
+  const currentSlide = track.querySelector(".current-slide");
+  const nextSlide = currentSlide.nextElementSibling;
+  const currentDot = dotsNav.querySelector(".current-slide");
+  const nextDot = currentDot.nextElementSibling;
+  const nextIndex = slides.findIndex((slide) => slide === nextSlide);
+
+  moveToSlide(track, currentSlide, nextSlide);
+  updateDots(currentDot, nextDot);
+  hideShowArrows(slides, prevButton, nextButton, nextIndex);
+});
+
+// when nav indicators are clicked, move to that slide
+
+dotsNav.addEventListener("click", (e) => {
+  // which indicator was clicked on
+  const targetDot = e.target.closest("button");
+
+  if (!targetDot) return;
+
+  const currentSlide = track.querySelector(".current-slide");
+  const currentDot = dotsNav.querySelector(".current-slide");
+  const targetIndex = dots.findIndex((dot) => dot === targetDot);
+  const targetSlide = slides[targetIndex];
+
+  moveToSlide(track, currentSlide, targetSlide);
+  updateDots(currentDot, targetDot);
+  hideShowArrows(slides, prevButton, nextButton, targetIndex);
+});
+
+// Modal
+
+const btns = document.querySelectorAll("[data-target]");
+const close_modals = document.querySelectorAll(".close-modal");
+const overlay = document.getElementById("overlay");
+
+btns.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    document.querySelector(btn.dataset.target).classList.add("active");
+    overlay.classList.add("active");
   });
+});
 
-  //Use smooth scrolling when clicking on navigation
-  $(".navbar a[href*=\\#]:not([href=\\#])").click(function () {
-    if (
-      location.pathname.replace(/^\//, "") === this.pathname.replace(/^\//, "") &&
-      location.hostname === this.hostname
-    ) {
-      var target = $(this.hash);
-      target = target.length ? target : $("[name=" + this.hash.slice(1) + "]");
-      if (target.length) {
-        $("html,body").animate(
-          {
-            scrollTop: target.offset().top - topoffset + 2,
-          },
-          500
-        );
-        return false;
-      } //target.length
-    } //click function
-  }); //smooth scrolling
+close_modals.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const modal = btn.closest(".modal-dialog");
+    modal.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+});
 
-  //Automatically generate carousel indicators
-  for (var i = 0; i < slideqty; i++) {
-    var insertText = '<li data-target="#featured" data-slide-to="' + i + '"';
-    if (i === randSlide) {
-      insertText += ' class="active" ';
-    }
-    insertText += "></li>";
-    $("#featured ol").append(insertText);
+window.onclick = (event) => {
+  if (event.target == overlay) {
+    const modals = document.querySelectorAll(".modal-dialog");
+    modals.forEach((modal) => modal.classList.remove("active"));
+    overlay.classList.remove("active");
   }
-
-  $(".carousel").carousel({
-    pause: false,
-  });
-});
-
-const open = document.getElementById("open");
-const modal_dialog = document.getElementById("modal_dialog");
-const close = document.getElementById("close");
-
-open.addEventListener("click", () => {
-  modal_dialog.classList.add("show");
-});
-
-close.addEventListener("click", () => {
-  modal_dialog.classList.remove("show");
-});
+};

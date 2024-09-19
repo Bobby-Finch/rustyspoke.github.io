@@ -56,30 +56,39 @@
       </nav>
     </header>
 
-    <div class="carousel fade" data-ride="carousel" id="featured">
-      <ol class="carousel-indicators"></ol>
-
-      <div class="carousel-inner">
-        <div class="item">
-          <img src="Images/carousel/wheel.png" alt="Wheel" />
-        </div>
-        <div class="item">
-          <img src="Images/carousel/phxbikelab.png" alt="Phoenix Bike Lab" />
-        </div>
-        <div class="item">
-          <img src="Images/carousel/bluebike.png" alt="Schwinn Bicycle" />
-        </div>
-        <div class="item">
-          <img src="Images/carousel/chainrings.png" alt="Chain Rings" />
-        </div>
+    <div class="carousel">
+      <button class="carousel__button carousel__button--left is-hidden">
+        <img src="" alt="" />
+      </button>
+      <div class="carousel__track-container">
+        <ul class="carousel__track">
+          <li class="carousel__slide current-slide">
+            <img class="carousel__image" src="Images/carousel/wheel.png" alt="Wheel" />
+          </li>
+          <li class="carousel__slide">
+            <img
+              class="carousel__image"
+              src="Images/carousel/phxbikelab.png"
+              alt="Phoenix Bike Lab"
+            />
+          </li>
+          <li class="carousel__slide">
+            <img class="carousel__image" src="Images/carousel/chainrings.png" alt="Chain Rings" />
+          </li>
+          <li class="carousel__slide">
+            <img class="carousel__image" src="Images/carousel/bluebike.png" alt="Schwinn Bicycle" />
+          </li>
+        </ul>
       </div>
-
-      <a class="left carousel-control" href="#featured" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-      </a>
-      <a class="right carousel-control" href="#featured" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-      </a>
+      <button class="carousel__button carousel__button--right">
+        <img src="" alt="" />
+      </button>
+      <div class="carousel__nav">
+        <button class="carousel__indicator current-slide"></button>
+        <button class="carousel__indicator"></button>
+        <button class="carousel__indicator"></button>
+        <button class="carousel__indicator"></button>
+      </div>
     </div>
 
     <div class="main">
@@ -96,147 +105,59 @@
           <div class="row">
             <article class="icon grassroots-modal">
               <img class="img-circle" src="Images/bikeicon.png" alt="Grassroots cycling resource" />
-              <button
-                type="button"
-                id="open"
-                class="btn btn-primary btn-lg"
-                data-toggle="modal"
-                data-target="#resourceModal"
-              >
+              <button class="btn btn-primary btn-lg" data-target="#modal1">
                 Grassroots Cycling Resource
               </button>
 
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="resourceModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="Resource Modal"
-              >
-                <div class="modal-dialog" id="modal_dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button
-                        type="button"
-                        class="close"
-                        id="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">Grassroots Cycling Resource</h4>
-                    </div>
-                    <div class="modal-body">
-                      Learn the basics of road, mountain, and urban cycling in Phoenix, bicycle
-                      maintenance, responsible riding, and safety from knowledgable cycling
-                      advocates.
-                    </div>
-                    <!-- modal-body -->
-                  </div>
-                  <!-- modal-content -->
+              <div class="modal-dialog" id="modal1">
+                <div class="modal-header">
+                  <button type="button" class="btn close-modal">&times;</button>
+                  <div class="modal-title">Grassroots Cycling Resource</div>
                 </div>
-                <!-- modal-dialog -->
+                <div class="modal-body">
+                  Learn the basics of road, mountain, and urban cycling in Phoenix, bicycle
+                  maintenance, responsible riding, and safety from knowledgable cycling advocates.
+                </div>
               </div>
-              <!-- myModal -->
             </article>
 
             <article class="icon do-it-yourself-modal">
               <img class="img-circle" src="Images/diyicon.png" alt="DIY repair spot" />
-              <button
-                type="button"
-                class="btn btn-primary btn-lg"
-                id="open"
-                data-toggle="modal"
-                data-target="#repairSpotModal"
-              >
+              <button class="btn btn-primary btn-lg" data-target="#modal2">
                 Do-It-Yourself Repair Spot
               </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="repairSpotModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="Repair spot modal"
-              >
-                <div class="modal-dialog" id="modal_dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button
-                        type="button"
-                        class="close"
-                        id="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">DIY Repair Spot</h4>
-                    </div>
-                    <div class="modal-body">
-                      Tune up your bike and your maintenance skills in the Rusty Spoke shop where
-                      you can find most, if not all of the tools you will need. Or, ask about
-                      work-trade to earn and build your own bike!
-                    </div>
-                    <!-- modal-body -->
-                  </div>
-                  <!-- modal-content -->
+              <div class="modal-dialog" id="modal2">
+                <div class="modal-header">
+                  <button class="btn close-modal">&times;</button>
+                  <div class="modal-title">DIY Repair Spot</div>
                 </div>
-                <!-- modal-dialog -->
+                <div class="modal-body">
+                  Tune up your bike and your maintenance skills in the Rusty Spoke shop where you
+                  can find most, if not all of the tools you will need. Or, ask about work-trade to
+                  earn and build your own bike!
+                </div>
               </div>
-              <!-- myModal -->
             </article>
 
             <article class="icon community-modal">
               <img class="img-circle" src="Images/communityicon.png" alt="Community event Space" />
-              <button
-                type="button"
-                id="open"
-                class="btn btn-primary btn-lg"
-                data-toggle="modal"
-                data-target="#communityModal"
-              >
+              <button class="btn btn-primary btn-lg" data-target="#modal3">
                 Community Event Space
               </button>
-
-              <!-- Modal -->
-              <div
-                class="modal fade"
-                id="communityModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="Community Event Space modal"
-              >
-                <div class="modal-dialog" id="modal_dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <button
-                        type="button"
-                        class="close"
-                        id="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                      <h4 class="modal-title" id="myModalLabel">Community Event Space</h4>
-                    </div>
-                    <div class="modal-body">
-                      The Rusty Spoke functions as a space for events such as movie screenings, rock
-                      shows, potlucks, and even the occasional dance party.
-                    </div>
-                    <!-- modal-body -->
-                  </div>
-                  <!-- modal-content -->
+              <div class="modal-dialog" id="modal3">
+                <div class="modal-header">
+                  <button class="btn close-modal">&times;</button>
+                  <div class="modal-title">Community Event Space</div>
                 </div>
-                <!-- modal-dialog -->
+                <div class="modal-body">
+                  The Rusty Spoke functions as a space for events such as movie screenings, rock
+                  shows, potlucks, and even the occasional dance party.
+                </div>
               </div>
-              <!-- myModal -->
             </article>
           </div>
+
+          <div id="overlay"></div>
           <!-- row -->
           <!-- <p>The Rusty spoke was founded in the fall of 2008 in the back yard of the long house art gallery on fifth street and Roosevelt. The collective was formed out of the growing interest in other community bicycle coops/collectives throughout Arizona and the country.</p>
             <p>The collective started with 4 core members with some knowledge, a small amount of tools, and used parts. Over the first year we began to grow out of our small backyard space and moved to a larger space on Grand Avenue, which was located on the west side of downtown Phoenix. We then moved again, right down the street, on Fillmore and Grand Avenue.</p>
@@ -385,8 +306,8 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>Peter</h3>
-                <p>Kind, but elusive.</p>
+                <h3 class="member-name">Peter</h3>
+                <p class="member-description">Kind, but elusive.</p>
               </div>
               <!-- info -->
             </div>
@@ -399,8 +320,8 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>Dave</h3>
-                <p>IT guy</p>
+                <h3 class="member-name">Dave</h3>
+                <p class="member-description">IT guy</p>
               </div>
               <!-- info -->
             </div>
@@ -413,8 +334,8 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>Bill</h3>
-                <p>
+                <h3 class="member-name">Bill</h3>
+                <p class="member-description">
                   Humble superhero, sans the cape. Fan of craft beer, independent movies, and riding
                   his bike anywhere he can.
                 </p>
@@ -430,8 +351,8 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>Richard</h3>
-                <p>
+                <h3 class="member-name">Richard</h3>
+                <p class="member-description">
                   Shows up occasionally on Wednesdays. Thinks that cantilever-frame cruisers are the
                   key to happiness. Plays in traffic.
                 </p>
@@ -447,8 +368,8 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>Spencer</h3>
-                <p>
+                <h3 class="member-name">Spencer</h3>
+                <p class="member-description">
                   Aspiring economist, professional casual bike commuter, amateur home chef. Enjoys
                   board game evenings and late night runs.
                 </p>
@@ -464,8 +385,10 @@
               </div>
               <!-- photo -->
               <div class="info">
-                <h3>This could be you!</h3>
-                <p>Pedal over to the Rusty Spoke to talk to the crew about volunteering.</p>
+                <h3 class="member-name">This could be you!</h3>
+                <p class="member-description">
+                  Pedal over to the Rusty Spoke to talk to the crew about volunteering.
+                </p>
               </div>
               <!-- info -->
             </div>
@@ -481,7 +404,7 @@
       <div class="page" id="donate">
         <div class="content container">
           <h2>Donations</h2>
-          <p>
+          <p class="donations-description">
             Running a successful co-op can get pretty expensive. We currently do not receive much in
             the way of grants and are almost 100% community-supported. Most of our funding comes
             from donations given at the shop by the people who use our services; however, given the
@@ -489,11 +412,11 @@
             means and the desire to help support the Rusty Spoke Community Bicycle Initiative please
             do by clicking the donate button.
           </p>
-          <p>
+          <p class="donations-description">
             We also accept donations of bicycle parts, tools, and your time in coming down to the
             shop to volunteer.
           </p>
-          <p>We appreciate the help friends!</p>
+          <p class="donations-description">We appreciate the help friends!</p>
 
           <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_s-xclick" />
@@ -524,7 +447,7 @@
     <!-- main -->
 
     <footer>
-      <div class="content container-fluid">
+      <div class="footer-content">
         <div class="row">
           <div class="col-sm-12">
             <p>&copy; 2017 The Rusty Spoke Bicycle Collective</p>
@@ -537,22 +460,22 @@
         </div>
         <!-- row -->
         <div class="row">
-          <div class="col-sm-1 col-sm-offset-4">
+          <div class="footer-icon">
             <a href="https://www.facebook.com/rustyspoke/"
               ><img class="img-responsive center-block" src="Images/fb-icon.png"
             /></a>
           </div>
-          <div class="col-sm-1">
+          <div class="footer-icon">
             <a href="https://twitter.com/rustyspokephx"
               ><img class="img-responsive center-block" src="Images/twitter-icon.png"
             /></a>
           </div>
-          <div class="col-sm-1">
+          <div class="footer-icon">
             <a href="https://www.instagram.com/rustyspokephx/"
               ><img class="img-responsive center-block" src="Images/ig-icon.png"
             /></a>
           </div>
-          <div class="col-sm-1">
+          <div class="footer-icon">
             <a href="#contact"
               ><img class="img-responsive center-block" src="Images/email-icon.png"
             /></a>
